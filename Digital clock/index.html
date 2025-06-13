@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Responsive Digital Clock</title>
+  <style>
+    /* Background setup */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      background-image: url("hourglass-2910948_1280.jpg");
+      background-size:cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Clock container */
+    .clock {
+      background: rgba(0, 0, 0, 0.6);
+      color: #00ffcc;
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #000;
+      font-size: 4rem;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    /* Responsive sizes */
+    @media (max-width: 768px) {
+      .clock {
+        font-size: 3rem;
+        padding: 30px 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .clock {
+        font-size: 2rem;
+        padding: 20px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="clock" id="digitalClock">00:00:00</div>
+
+  <script>
+    function updateClock() {
+        let time = new Date()
+let hour = time.getHours()
+let min = time.getMinutes()
+let sec = time.getSeconds()
+
+am_pm = "AM"
+
+if (hour >= 12){
+    if (hour > 12) hour -= 12
+    am_pm = "PM"
+}
+else if (hour == 0){
+    hour = 12
+    am_pm = "AM"
+}
+
+
+hour = hour < 10 ? "0"  + hour : hour
+min = min < 10 ? "0"  + min : min
+sec = sec < 10 ? "0"  + sec : sec
+
+let cuurTime = hour + ":" + min + ":" + sec + am_pm
+
+      document.getElementById('digitalClock').textContent = cuurTime;
+    }
+
+    // Initial call
+    updateClock();
+
+    // Update every second
+    setInterval(updateClock, 1000);
+  </script>
+
+</body>
+</html>
