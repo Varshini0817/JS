@@ -89,6 +89,28 @@ body{
     }
 }
 
+@media only screen and (max-width: 400px) {
+    .clock{
+        font-size: 1.5rem;
+        padding: 20px 30px;
+        position: absolute;
+        top: 45%;
+        right: 25px;
+    }
+    body{
+        background: url("hourglass-2910948_1280.jpg") center/cover no-repeat;
+        background-size: contain;
+        position: relative;
+    }
+    body::before{
+        content: "";
+        position: absolute;
+        top:0; left:0; right:0; bottom:0;
+        background: linear-gradient(89.2deg, rgba(255,255,255,0.6), rgba(248, 180, 146, 0.6));
+        z-index: 0;
+    }
+}
+
 @media (min-aspect-ratio: 1/1) {
     .back-video{
         width: 100%;
