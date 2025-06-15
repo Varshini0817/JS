@@ -7,6 +7,7 @@ function updateClock(){
     am_pm = "AM";
 
     if (hours > 12){
+        hours -= 12;
         am_pm = "PM"
     }
     else if (hours == 0){
