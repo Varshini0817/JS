@@ -1,20 +1,22 @@
 let istTime;
-let gradientStyleTag = null;
+let gradientStyleTag = null; //background effect
 let currentMode = null; // 'video' or 'image'
 
-// Fetch IST time
+// IST time using API
+// area and location Asia/Kolkata Continent/Location
 async function fetchISTTime() {
     try {
         const response = await fetch("https://timeapi.io/api/timezone/zone?timeZone=Asia%2FKolkata");
         const data = await response.json();
-        istTime = new Date(data.currentLocalTime);
+        console.log(response);
+        istTime = new Date(data.currentLocalTime); //changing to date format
     } catch (error) {
         console.error("Failed to fetch IST time:", error);
         document.getElementById("digital_clock").textContent = "IST time not available.";
     }
 }
 
-// Update the clock every second
+// Update for every second (1000ms)
 function updateClock() {
     if (!istTime) return;
 
@@ -26,9 +28,9 @@ function updateClock() {
     let am_pm = "AM";
 
     if (hours >= 12) {
-        if (hours > 12) hours -= 12;
-        am_pm = "PM";
-    } else if (hours === 0) {
+        if (hours > 12) hours -= 12; //from 13 hrs
+        am_pm = "PM"; //if >= 12 setting to PM
+    } else if (hours === 0) { //24 hour format
         hours = 12;
     }
 
@@ -36,11 +38,11 @@ function updateClock() {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    const currTime = `${hours}:${minutes}:${seconds} ${am_pm}`;
+    const currTime = `${hours}:${minutes}:${seconds}${am_pm}`;
     document.getElementById("digital_clock").textContent = currTime;
 }
 
-// Handle screen size: show image or video
+// Displaying image or video accordingly
 function switchDisplayBasedOnWidth() {
     const loader = document.getElementById("loading");
     const video = document.getElementById("hourglass_video");
@@ -48,18 +50,21 @@ function switchDisplayBasedOnWidth() {
 
     const isMobile = window.innerWidth <= 768;
     const newMode = isMobile ? "image" : "video";
-    if (currentMode === newMode) return;
+    if (currentMode === newMode) return; //if after resizing and before resizing is same -> no action
 
     currentMode = newMode;
-    loader.style.display = "block";
-    dC.style.display = "none";
+    loader.style.display = "block"; //Show loading initially
+    dC.style.display = "none";// don't display even time
 
+    //Mobile screen-> image
+    //stop video
     if (isMobile) {
         video.pause();
-        video.style.display = "none";
+        video.style.display = "none"; //remove video
 
         const bgImg = new Image();
         bgImg.src = "hourglass-2910948_1280.jpg";
+        //Lazy loading image
         bgImg.onload = () => {
             document.body.style.background = `url(${bgImg.src}) center/cover no-repeat`;
             document.body.style.backgroundSize = "contain";
@@ -79,13 +84,21 @@ function switchDisplayBasedOnWidth() {
                     }
                 `;
                 document.head.appendChild(gradientStyleTag);
+            //  dynamic css     
+                // <head>
+                //   ...<style>
+                //     body::before {
+                //       ...
+                //     }
+                //   </style>
+                // </head>
             }
 
-            loader.style.display = "none";
-            dC.style.display = "block";
+            loader.style.display = "none"; //removing loader 
+            dC.style.display = "block"; //showing time
         };
     } else {
-        document.body.style.background = "none";
+        document.body.style.background = "none"; //removing background effect for larger screens(video)
         if (gradientStyleTag) {
             gradientStyleTag.remove();
             gradientStyleTag = null;
@@ -94,7 +107,7 @@ function switchDisplayBasedOnWidth() {
         video.style.display = "none";
         video.src = "hour_glass.mp4";
         video.load();
-
+        //Lazy loading video
         video.oncanplaythrough = () => {
             loader.style.display = "none";
             video.style.display = "block";
@@ -103,13 +116,15 @@ function switchDisplayBasedOnWidth() {
     }
 }
 
-// Set up
+// Implement lazy loading according to width
 window.addEventListener("load", () => {
     switchDisplayBasedOnWidth();
+    //once api is fetched , call updateClock() for every second
     fetchISTTime().then(() => {
-        updateClock();
-        setInterval(updateClock, 1000);
+        updateClock();  // (1) Run once immediately after time is fetched
+        setInterval(updateClock, 1000); // (2) Run every second to update ticking time
     });
 });
 
+//Handling for each resize (changes : image, video)
 window.addEventListener("resize", switchDisplayBasedOnWidth);
