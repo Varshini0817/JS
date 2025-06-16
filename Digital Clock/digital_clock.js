@@ -31,7 +31,7 @@ function updateClock() {
     istMinutes = istMinutes < 10 ? "0" + istMinutes : istMinutes;
     utcSeconds = utcSeconds < 10 ? "0" + utcSeconds : utcSeconds;
 
-    const currTime = istHours + ":" + istMinutes + ":" + utcSeconds + " " + am_pm;
+    const currTime = istHours + ":" + istMinutes + ":" + utcSeconds + am_pm;
     const dC= document.getElementById("digital_clock");
     dC.textContent = currTime;
 

@@ -23,12 +23,18 @@ body{
     letter-spacing: 2px;
 
 }
-.back-video{
+/* .back-video{
     position: absolute;
     right: 0;
     z-index: -1;
+} */
+.back-video {
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }
-
 
 .loader {
         width: 48px;
@@ -122,16 +128,23 @@ body{
     }
 }
 
-@media (min-aspect-ratio: 1/1) {
+/*landscape modes and width is greater than height*/
+@media only screen and (min-aspect-ratio: 16/9) {
     .back-video{
         width: 100%;
         height: auto;
     }
 }
 
-@media(max-aspect-ratio: 16/9){
+@media only screen and (max-aspect-ratio: 9/16){
     .back-video{
-        height: 100%;
-        width: auto;
+        object-fit: contain;
+        height: auto;
+        width: 100vw;
+    }
+    .clock{
+        font-size: 2rem;
+        top:47%;
+        right: 30px;
     }
 }
