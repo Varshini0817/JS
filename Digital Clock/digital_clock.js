@@ -36,13 +36,30 @@ function updateClock() {
     dC.textContent = currTime;
 
     window.addEventListener("load", () => {
-        const video = document.getElementById("hourglass_video");
-        document.getElementById("loading").style.display ="none";
-        video.style.display = "block";
+    const loader = document.getElementById("loading");
+    const video = document.getElementById("hourglass_video");
+    const dC = document.getElementById("digital_clock");
+
+    // Check if screen is small (where video is hidden and image is used)
+    if (window.innerWidth <= 768) {
+        // Create a dummy image to preload the background
+        const bgImg = new Image();
+        bgImg.src = "hourglass-2910948_1280.jpg";
+        bgImg.onload = () => {
+            loader.style.display = "none";
+            dC.style.display = "block";
+        };
+    } else {
+        // Desktop behavior: wait for video to be ready
         video.src = "hour_glass.mp4";
-        video.play();
-        dC.style.display="block";
-  });
+        video.oncanplaythrough = () => {
+            loader.style.display = "none";
+            video.style.display = "block";
+            dC.style.display = "block";
+        };
+    }
+});
+
 }
 
 setInterval(updateClock, 1000);
