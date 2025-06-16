@@ -40,9 +40,9 @@ function updateClock() {
     const video = document.getElementById("hourglass_video");
     const dC = document.getElementById("digital_clock");
 
-    // Check if screen is small (where video is hidden and image is used)
     if (window.innerWidth <= 768) {
         // Create a dummy image to preload the background
+        dC.style.display = "none";
         const bgImg = new Image();
         bgImg.src = "hourglass-2910948_1280.jpg";
         bgImg.onload = () => {
