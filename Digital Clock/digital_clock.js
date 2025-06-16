@@ -35,7 +35,7 @@ function updateClock() {
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    const currTime = `${hours}:${minutes}:${seconds} ${am_pm}`;
+    const currTime = `${hours}:${minutes}:${seconds}${am_pm}`;
     document.getElementById("digital_clock").textContent = currTime;
     // console.log(currTime);
 }
