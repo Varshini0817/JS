@@ -29,6 +29,7 @@ body{
     z-index: -1;
 }
 
+
 .loader {
         width: 48px;
         height: 48px;
@@ -86,19 +87,7 @@ body{
         visibility: hidden;
     }
     body{
-        background: url("hourglass-2910948_1280.jpg") center/cover no-repeat; 
-        background-size: contain;
         position: relative;
-    }
-    body::before{
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(100.2deg, rgba(255, 255, 255, 0), rgba(250, 159, 114, 0.711));
-        z-index: 0;
     }
 }
 @media(max-width: 480px){
@@ -109,17 +98,11 @@ body{
         top: 45%;
         right: 30px;
     }
-    body{
-        background: url("hourglass-2910948_1280.jpg") center/cover no-repeat;
-        background-size: contain;
-        position: relative;
+    .back-video{
+        visibility: hidden;
     }
-    body::before{
-        content: "";
-        position: absolute;
-        top:0; left:0; right:0; bottom:0;
-        background: linear-gradient(89.2deg, rgba(255,255,255,0.6), rgba(248, 180, 146, 0.6));
-        z-index: 0;
+    body{
+        position: relative;
     }
 }
 
@@ -131,17 +114,11 @@ body{
         top: 45%;
         right: 25px;
     }
-    body{
-        background: url("hourglass-2910948_1280.jpg") center/cover no-repeat;
-        background-size: contain;
-        position: relative;
+    .back-video{
+        visibility: hidden;
     }
-    body::before{
-        content: "";
-        position: absolute;
-        top:0; left:0; right:0; bottom:0;
-        background: linear-gradient(89.2deg, rgba(255,255,255,0.6), rgba(248, 180, 146, 0.6));
-        z-index: 0;
+    body{
+        position: relative;
     }
 }
 

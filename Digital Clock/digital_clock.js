@@ -35,30 +35,82 @@ function updateClock() {
     const dC= document.getElementById("digital_clock");
     dC.textContent = currTime;
 
-    window.addEventListener("load", () => {
+ let gradientStyleTag = null;
+let currentMode = null; // 'video' or 'image'
+
+function switchDisplayBasedOnWidth() {
     const loader = document.getElementById("loading");
     const video = document.getElementById("hourglass_video");
     const dC = document.getElementById("digital_clock");
 
-    if (window.innerWidth <= 768) {
-        // Create a dummy image to preload the background
-        dC.style.display = "none";
+    // Prevent redundant processing
+    const isMobile = window.innerWidth <= 768;
+    const newMode = isMobile ? "image" : "video";
+    if (currentMode === newMode) return;
+
+    currentMode = newMode;
+    loader.style.display = "block";
+    dC.style.display = "none";
+
+    if (isMobile) {
+        // Switch to image background
+        video.pause();
+        video.style.display = "none";
+
         const bgImg = new Image();
         bgImg.src = "hourglass-2910948_1280.jpg";
+
         bgImg.onload = () => {
+            document.body.style.background = `url(${bgImg.src}) center/cover no-repeat`;
+            document.body.style.backgroundSize = "contain";
+
+            // Add overlay gradient
+            if (!gradientStyleTag) {
+                gradientStyleTag = document.createElement("style");
+                gradientStyleTag.innerHTML = `
+                    body::before {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(100.2deg, rgba(255, 255, 255, 0), rgba(250, 159, 114, 0.711));
+                        z-index: 0;
+                    }
+                `;
+                document.head.appendChild(gradientStyleTag);
+            }
+
             loader.style.display = "none";
             dC.style.display = "block";
         };
     } else {
-        // Desktop behavior: wait for video to be ready
-        video.src = "hour_glass.mp4";
+        // Switch to video background
+        document.body.style.background = "none";
+        if (gradientStyleTag) {
+            gradientStyleTag.remove();
+            gradientStyleTag = null;
+        }
+
+        // Reset video src and show
+        video.style.display = "none";
+        video.src = "hour_glass.mp4"; // force reload
+        video.load(); // ensure it prepares to play
+
         video.oncanplaythrough = () => {
             loader.style.display = "none";
             video.style.display = "block";
             dC.style.display = "block";
         };
     }
-});
+}
+
+// Initial load and dynamic resizing
+window.addEventListener("load", switchDisplayBasedOnWidth);
+window.addEventListener("resize", switchDisplayBasedOnWidth);
+
+
 
 }
 
