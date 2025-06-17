@@ -3,7 +3,7 @@ let gradientStyleTag = null; //background effect
 let currentMode = null; // 'video' or 'image'
 
 // IST time using API
-// area and location Asia/Kolkata Continent/Location
+// area and location Asia/Kolkata Continent/Location IANA
 async function fetchISTTime() {
     try {
         const response = await fetch("https://timeapi.io/api/timezone/zone?timeZone=Asia%2FKolkata");
