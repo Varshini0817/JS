@@ -1,7 +1,6 @@
 let istTime;
 let gradientStyleTag = null; //background effect
 let currentMode = null; // 'video' or 'image'
-
 // IST time using API
 // area and location Asia/Kolkata Continent/Location IANA
 async function fetchISTTime() {
