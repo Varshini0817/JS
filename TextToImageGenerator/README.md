@@ -21,6 +21,7 @@ Generate stunning AI-generated images using text prompts, powered by Hugging Fac
 - 🔐 **Secure API Handling** – API key is stored in the backend via `.env`, never exposed to users.
 - 📏 **Dynamic Aspect Ratio** – Supports common ratios like `1:1`, `16:9`, and `9:16`.
 - 🖼️ **Multiple Image Generation** – Create 1 to 4 images in one go.
+- ⬇️ **One-Click Image Download** – Instantly download generated images directly from the UI.
 
 ---
 
