@@ -58,7 +58,7 @@ ImageGeneratorAI/
 ### 1. Clone the repo
 ```bash
 git clone https://github.com/Varshini0817/JS.git
-cd JS/ImageGeneratorAI
+cd JS/TextToImageGenerator
 ```
 
 ### 2. Install backend dependencies
