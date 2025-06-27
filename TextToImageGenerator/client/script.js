@@ -80,9 +80,9 @@ const updateImageCards =(imgIdex, imgURL)=>{
                 </div>`;
 }
 
-const generateImages = async (promptText, selectedModal, imageCount, aspectRatio)=>{
+const generateImages = async (promptText, selectedModel, imageCount, aspectRatio)=>{
     const { width, height } = getImageDimensions(aspectRatio);
-    const Model_URL = `https://router.huggingface.co/hf-inference/models/${selectedModal}`;
+    const Model_URL = `https://router.huggingface.co/hf-inference/models/${selectedModel}`;
 
     generateBtn.setAttribute("disabled", "true");
     // 🔐 Fetch API key securely
@@ -125,7 +125,7 @@ const generateImages = async (promptText, selectedModal, imageCount, aspectRatio
         generateBtn.removeAttribute("disabled");
 }
 
-const createImageCards = (promptText, selectedModal, imageCount, aspectRatio)=> {
+const createImageCards = (promptText, selectedModel, imageCount, aspectRatio)=> {
     gridGallery.innerHTML = "";
     for (let i = 0; i < imageCount; i++) {
         gridGallery.innerHTML +=  `<div class="img-card loading" id = "img-card-${i}" style ="aspect-ratio: ${aspectRatio}">
@@ -137,19 +137,19 @@ const createImageCards = (promptText, selectedModal, imageCount, aspectRatio)=> 
             </div>`
     }
 
-    generateImages(promptText, selectedModal, imageCount, aspectRatio);
+    generateImages(promptText, selectedModel, imageCount, aspectRatio);
 }
 
 //Handle form submission
 const handleFormSubmit = (e) =>{
     e.preventDefault();
-    const  selectedModal = modelSelect.value;
+    const  selectedModel = modelSelect.value;
     const imageCount = parseInt(countSelect.value) || 1;
     const aspectRatio = ratioSelect.value || "1/1";
     const promptText = promptInput.value;
 
-    // console.log(promptText, selectedModal, imageCount, aspectRatio)
-    createImageCards(promptText, selectedModal, imageCount, aspectRatio)
+    // console.log(promptText, selectedModel, imageCount, aspectRatio)
+    createImageCards(promptText, selectedModel, imageCount, aspectRatio)
 
 }
 
