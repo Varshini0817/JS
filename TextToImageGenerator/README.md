@@ -7,7 +7,7 @@ Generate stunning AI-generated images using text prompts, powered by Hugging Fac
 
 ## 🔗 Links
 
-- 🔗 **GitHub Repo:** [Varshini0817/JS – ImageGeneratorAI](https://github.com/Varshini0817/JS/tree/main/ImageGeneratorAI)
+- 🔗 **GitHub Repo:** [Varshini0817/JS – TextToImageGenerator](https://github.com/Varshini0817/JS/tree/main/TextToImageGenerator)
 - 🌐 **Live Frontend:** [text-image-generator-vv.vercel.app](https://text-image-generator-vv.vercel.app/)
 - 📘 **Hugging Face Task Reference:** [huggingface.co/docs/inference-providers/en/tasks/text-to-image](https://huggingface.co/docs/inference-providers/en/tasks/text-to-image)
 
