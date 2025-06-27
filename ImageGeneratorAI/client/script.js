@@ -67,7 +67,7 @@ const getImageDimensions = (aspectRatio, baseSize = 512)=>{
 }   
 
 const updateImageCards =(imgIdex, imgURL)=>{
-    const imgcard = document.getElementById(`img-card=${imgIdex}`);
+    const imgcard = document.getElementById(`img-card-${imgIdex}`);
 
     if(!imgcard) return;
     imgcard.classList.remove("loading");
@@ -86,9 +86,13 @@ const generateImages = async (promptText, selectedModal, imageCount, aspectRatio
 
     generateBtn.setAttribute("disabled", "true");
     // 🔐 Fetch API key securely
-    const keyRes = await fetch('http://localhost:3000/api-key');
+    const API_BASE_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:3000"
+  : "https://text-image-generator-59jx.onrender.com/api-key";
+    const keyRes = await fetch(API_BASE_URL);
     const keyData = await keyRes.json();
     const apiKey = keyData.key;
+    // console.log(apiKey,keyRes, keyData);
     
     const imagePromises = Array.from({length: imageCount}, async(_, i)=>{
         try{
@@ -118,7 +122,7 @@ const generateImages = async (promptText, selectedModal, imageCount, aspectRatio
         }
     })
         await Promise.allSettled(imagePromises);
-        generateBtn.setAttribute("disabled", "false");
+        generateBtn.removeAttribute("disabled");
 }
 
 const createImageCards = (promptText, selectedModal, imageCount, aspectRatio)=> {
